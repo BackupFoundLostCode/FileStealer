@@ -6,7 +6,6 @@
 #include <string>
 #include <fstream>
 #include <ctime>
-#include <iomanip>
 
 using namespace std;
 
@@ -108,6 +107,7 @@ int main(){
 		}
 		return EXIT_SUCCESS;
 }
+
 
 
 
