@@ -8,25 +8,24 @@
 #include <ctime>
 
 using namespace std;
-
-
-int main(){
+int main() {
 	system("color 02");
-		while (true) {
-
-			std::string filenameWhichGetCopy;
-			std::string a = "FileStealerInfo.txt";
-			std::string nameUSB;
-
+	int option;
+	while (true) {
+		std::string filenameWhichGetCopy;
+		std::string a = "FileStealerInfo.txt";
+		std::string nameUSB;
+		std::cout << "1 searching File." << endl <<"2 for read FileStealerInfo.txt." << endl;
+		std::cin >> option;
+		if (option==1){
 			std::cout << "Name (Letter) of your USB Device:\n";
 			std::cin >> nameUSB;
 			std::ofstream newFile(nameUSB + ":" + a, ios::app);
 			std::cout << "Name for File to Copy:\n";
 			std::cin >> filenameWhichGetCopy;
-
+			//
 			std::filesystem::path dr(nameUSB + ":/");
 			std::filesystem::path p(nameUSB + ":" + a);
-
 			try {
 				if (filesystem::exists(p)) {
 					cout << "\nPath on Device exists! Path is:\n";
@@ -44,13 +43,13 @@ int main(){
 								cout << dd.path() << endl;
 								try {
 									std::filesystem::copy_file(dd.path(), dr / dd.path().filename());
-									cout << "Copy Success!\n";
-
+									cout << "COPY SUCCESS!\n";
+									//
 									time_t now;
 									struct tm nowlocal;
 									now = time(NULL);
 									localtime_s(&nowlocal, &now);
-
+									//
 									newFile << setfill('0')
 										<< "Filename: " << filenameWhichGetCopy << "\n"
 										<< "Path: " << dd.path() << "\n"
@@ -71,7 +70,7 @@ int main(){
 									struct tm nowlocal;
 									now = time(NULL);
 									localtime_s(&nowlocal, &now);
-
+									//
 									newFile << setfill('0')
 										<< "Filename: " << filenameWhichGetCopy << "\n"
 										<< "Path: " << dd.path() << "\n"
@@ -105,9 +104,28 @@ int main(){
 				system("pause");
 			}
 		}
-		return EXIT_SUCCESS;
+		else if (option==2){
+			std::ifstream dataTXT{a};
+			if (dataTXT.fail()){
+				std::cout << "Fail open FileStealerInfo.txt!\n";
+				Sleep(1000);
+				std::cout << "Back to Menue in 2 Seconds.\n";
+				std::cout << "\n";
+				Sleep(2000);
+				continue;
+			}
+			else {
+				//Output FileStealerInfo.txt on Console. Doesent work jet.
+				string output;
+				dataTXT >> output;
+				std::cout << output;
+			}
+		}
+		else {
+			std::cout << "Wrong Nuber!\n";
+			std::cout << "\n";
+			Sleep(2000);
+		}
+	}
+	return EXIT_SUCCESS;
 }
-
-
-
-
