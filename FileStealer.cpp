@@ -12,17 +12,17 @@ int main() {
 	system("color 02");
 	int option;
 	std::string a = "FileStealerInfo.txt";
-    std::string deviceLetter = "D:/";//D: ?
-	std::string fusion = deviceLetter+a;
+	std::string deviceLetter = "D:/";//D: ?
+	std::string fusion = deviceLetter + a;
 	//
 	std::filesystem::path forShowInfos(fusion);
 	while (true) { //i wish there were a loop...
 		std::string filenameWhichGetCopy;
-		std::cout << "1 searching File." << std::endl <<"2 for read FileStealerInfo.txt." << std::endl << "3 for EXIT Program." << std::endl;
+		std::cout << "1. searching File." << std::endl << "2. for read FileStealerInfo.txt." << std::endl << "3. for EXIT Program." << std::endl;
 		std::cin >> option;
 		std::cout << "\n";
-		if (option==1){
-			std::ofstream newFile("D:" + a, ios::app);
+		if (option == 1) {
+			std::ofstream newFile(deviceLetter + a, ios::app);
 			std::cout << "Name for File to Copy:\n";
 			std::cin >> filenameWhichGetCopy;
 			//
@@ -37,8 +37,7 @@ int main() {
 					}
 					system("pause");
 					try {
-						std::filesystem::recursive_directory_iterator d("C:/", std::filesystem::directory_options::skip_permission_denied);
-						for (const auto& dd : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied)) {
+						for (const auto& dd : std::filesystem::recursive_directory_iterator("C:/",std::filesystem::directory_options::skip_permission_denied |std::filesystem::directory_options::follow_directory_symlink)) {//Unfortunately, I was too stupid to solve the problem myself.
 							cout << dd << std::endl;
 							if (dd.path().filename() == filenameWhichGetCopy) {
 								cout << "\nFOUND FILE!\n";
@@ -62,7 +61,7 @@ int main() {
 										<< "Time: "
 										<< setw(2) << nowlocal.tm_hour << ":"
 										<< setw(2) << nowlocal.tm_min << ":"
-										<< setw(2) << nowlocal.tm_sec << "\n" << std::endl; 
+										<< setw(2) << nowlocal.tm_sec << "\n" << std::endl;
 									system("pause");
 									cout << "\n";
 								}
@@ -107,9 +106,9 @@ int main() {
 				system("pause");
 			}
 		}
-		else if (option==2){
-			std::ifstream dataTXT{forShowInfos};//Path for Output on console.
-			if (dataTXT.fail() || !dataTXT.is_open()){
+		else if (option == 2) {
+			std::ifstream dataTXT{ forShowInfos };//Path for Output on console.
+			if (dataTXT.fail() || !dataTXT.is_open()) {
 				std::cout << "Fail open FileStealerInfo.txt!\n";
 				Sleep(1000);
 				std::cout << "Back to Menue in 2 Seconds.\n";
