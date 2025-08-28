@@ -16,7 +16,7 @@ int main() {
 	std::string fusion = deviceLetter+a;
 	//
 	std::filesystem::path forShowInfos(fusion);
-	while (true) {
+	while (true) { //i wish there were a loop...
 		std::string filenameWhichGetCopy;
 		std::cout << "1 searching File." << std::endl <<"2 for read FileStealerInfo.txt." << std::endl << "3 for EXIT Program." << std::endl;
 		std::cin >> option;
@@ -140,3 +140,4 @@ int main() {
 	}
 	return EXIT_SUCCESS;
 }
+
