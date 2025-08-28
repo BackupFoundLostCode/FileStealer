@@ -11,38 +11,40 @@ using namespace std;
 int main() {
 	system("color 02");
 	int option;
+	std::string a = "FileStealerInfo.txt";
+    std::string deviceLetter = "D:/";//D: ?
+	std::string fusion = deviceLetter+a;
+	//
+	std::filesystem::path forShowInfos(fusion);
 	while (true) {
 		std::string filenameWhichGetCopy;
-		std::string a = "FileStealerInfo.txt";
-		std::string nameUSB;
-		std::cout << "1 searching File." << endl <<"2 for read FileStealerInfo.txt." << endl;
+		std::cout << "1 searching File." << std::endl <<"2 for read FileStealerInfo.txt." << std::endl << "3 for EXIT Program." << std::endl;
 		std::cin >> option;
+		std::cout << "\n";
 		if (option==1){
-			std::cout << "Name (Letter) of your USB Device:\n";
-			std::cin >> nameUSB;
-			std::ofstream newFile(nameUSB + ":" + a, ios::app);
+			std::ofstream newFile("D:" + a, ios::app);
 			std::cout << "Name for File to Copy:\n";
 			std::cin >> filenameWhichGetCopy;
 			//
-			std::filesystem::path dr(nameUSB + ":/");
-			std::filesystem::path p(nameUSB + ":" + a);
+			std::filesystem::path PathCopyTo(deviceLetter);
+			std::filesystem::path p(deviceLetter + a);
 			try {
 				if (filesystem::exists(p)) {
 					cout << "\nPath on Device exists! Path is:\n";
 					cout << "\n";
 					for (const auto& path : p) {
-						cout << path << endl;
+						cout << path << std::endl;
 					}
 					system("pause");
 					try {
 						std::filesystem::recursive_directory_iterator d("C:/", std::filesystem::directory_options::skip_permission_denied);
 						for (const auto& dd : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied)) {
-							cout << dd << endl;
+							cout << dd << std::endl;
 							if (dd.path().filename() == filenameWhichGetCopy) {
 								cout << "\nFOUND FILE!\n";
-								cout << dd.path() << endl;
+								cout << dd.path() << std::endl;
 								try {
-									std::filesystem::copy_file(dd.path(), dr / dd.path().filename());
+									std::filesystem::copy_file(dd.path(), PathCopyTo / dd.path().filename());
 									cout << "COPY SUCCESS!\n";
 									//
 									time_t now;
@@ -60,7 +62,7 @@ int main() {
 										<< "Time: "
 										<< setw(2) << nowlocal.tm_hour << ":"
 										<< setw(2) << nowlocal.tm_min << ":"
-										<< setw(2) << nowlocal.tm_sec << "\n" << endl;
+										<< setw(2) << nowlocal.tm_sec << "\n" << std::endl; 
 									system("pause");
 									cout << "\n";
 								}
@@ -81,7 +83,7 @@ int main() {
 										<< "Time: "
 										<< setw(2) << nowlocal.tm_hour << ":"
 										<< setw(2) << nowlocal.tm_min << ":"
-										<< setw(2) << nowlocal.tm_sec << "\n" << endl;
+										<< setw(2) << nowlocal.tm_sec << "\n" << std::endl;
 									system("pause");
 									cout << "\n";
 								}
@@ -92,6 +94,7 @@ int main() {
 					catch (const std::exception&) {
 						cout << "Search failed or file does not exist.\n";
 						system("pause");
+						std::cout << "\n";
 					}
 				}
 				else {
@@ -105,8 +108,8 @@ int main() {
 			}
 		}
 		else if (option==2){
-			std::ifstream dataTXT{a};
-			if (dataTXT.fail()){
+			std::ifstream dataTXT{forShowInfos};//Path for Output on console.
+			if (dataTXT.fail() || !dataTXT.is_open()){
 				std::cout << "Fail open FileStealerInfo.txt!\n";
 				Sleep(1000);
 				std::cout << "Back to Menue in 2 Seconds.\n";
@@ -115,11 +118,19 @@ int main() {
 				continue;
 			}
 			else {
-				//Output FileStealerInfo.txt on Console. Doesent work jet.
-				string output;
-				dataTXT >> output;
-				std::cout << output;
+				std::string output;
+				while (getline(dataTXT, output)) {
+					std::cout << output << std::endl;
+				}
+				dataTXT.close();
+				system("pause");
 			}
+		}
+		else if (option == 3) {
+			std::cout << "Exit Program in 3 Seconds.";
+			Sleep(3000);
+			return 0;
+
 		}
 		else {
 			std::cout << "Wrong Nuber!\n";
