@@ -9,7 +9,7 @@
 
 using namespace std;
 void setColor(int color) {
-	//ChatGPT.
+	//ChatGPT, sorry but i want a quick option to change the Colors :).
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, color);
 }
@@ -154,4 +154,5 @@ int main() {
 	}
 	return EXIT_SUCCESS;
 }
+
 
