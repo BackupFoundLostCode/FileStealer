@@ -8,8 +8,12 @@
 #include <ctime>
 
 using namespace std;
+void setColor(int color) {
+	//ChatGPT.
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, color);
+}
 int main() {
-	system("color 02");
 	int option;
 	std::string a = "FileStealerInfo.txt";
 	std::string deviceLetter = "D:/";//D: ?
@@ -18,6 +22,7 @@ int main() {
 	std::filesystem::path forShowInfos(fusion);
 	while (true) { //i wish there were a loop...
 		std::string filenameWhichGetCopy;
+		setColor(10);
 		std::cout << "1. searching File." << std::endl << "2. for read FileStealerInfo.txt." << std::endl << "3. for EXIT Program." << std::endl;
 		std::cin >> option;
 		std::cout << "\n";
@@ -37,9 +42,10 @@ int main() {
 					}
 					system("pause");
 					try {
-						for (const auto& dd : std::filesystem::recursive_directory_iterator("C:/",std::filesystem::directory_options::skip_permission_denied |std::filesystem::directory_options::follow_directory_symlink)) {//Unfortunately, I was too stupid to solve the problem myself.
+						setColor(10);
+						for (const auto& dd : std::filesystem::recursive_directory_iterator("C:/",std::filesystem::directory_options::skip_permission_denied |std::filesystem::directory_options::follow_directory_symlink)) {
 							cout << dd << std::endl;
-							if (dd.path().filename() == filenameWhichGetCopy) {
+							if (dd.path().string().find(filenameWhichGetCopy) != std::string::npos){
 								cout << "\nFOUND FILE!\n";
 								cout << dd.path() << std::endl;
 								try {
@@ -66,6 +72,7 @@ int main() {
 									cout << "\n";
 								}
 								catch (const std::exception&) {
+									setColor(12);
 									cout << "Copy failed! Find information in FileStealer.txt!\n";
 									time_t now;
 									struct tm nowlocal;
@@ -91,17 +98,20 @@ int main() {
 						}
 					}
 					catch (const std::exception&) {
+						setColor(12);
 						cout << "Search failed or file does not exist.\n";
 						system("pause");
 						std::cout << "\n";
 					}
 				}
 				else {
+					setColor(12);
 					std::cout << "Path does not exist!\n";
 					system("pause");
 				}
 			}
 			catch (const std::exception&) {
+				setColor(12);
 				std::cout << "Search failed - fatal error!\n";
 				system("pause");
 			}
@@ -109,8 +119,10 @@ int main() {
 		else if (option == 2) {
 			std::ifstream dataTXT{ forShowInfos };//Path for Output on console.
 			if (dataTXT.fail() || !dataTXT.is_open()) {
+				setColor(12);
 				std::cout << "Fail open FileStealerInfo.txt!\n";
 				Sleep(1000);
+				setColor(10);
 				std::cout << "Back to Menue in 2 Seconds.\n";
 				std::cout << "\n";
 				Sleep(2000);
@@ -118,6 +130,7 @@ int main() {
 			}
 			else {
 				std::string output;
+				setColor(10);
 				while (getline(dataTXT, output)) {
 					std::cout << output << std::endl;
 				}
@@ -126,12 +139,13 @@ int main() {
 			}
 		}
 		else if (option == 3) {
+			setColor(10);
 			std::cout << "Exit Program in 3 Seconds.";
 			Sleep(3000);
 			return 0;
-
 		}
 		else {
+			setColor(12);
 			std::cout << "Wrong Nuber!\n";
 			std::cout << "\n";
 			Sleep(2000);
