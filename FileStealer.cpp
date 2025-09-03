@@ -15,6 +15,7 @@ void setColor(int color) {
 }
 int main() {
 	int option;
+	int* aRev = &option;
 	std::string a = "FileStealerInfo.txt";
 	std::string deviceLetter = "D:/";//D: ?
 	std::string fusion = deviceLetter + a;
@@ -24,9 +25,9 @@ int main() {
 		std::string filenameWhichGetCopy;
 		setColor(10);
 		std::cout << "1. searching File." << std::endl << "2. for read FileStealerInfo.txt." << std::endl << "3. for EXIT Program." << std::endl;
-		std::cin >> option;
+		std::cin >> *aRev;
 		std::cout << "\n";
-		if (option == 1) {
+		if (*aRev == 1) {
 			std::ofstream newFile(deviceLetter + a, ios::app);
 			std::cout << "Name for File to Copy:\n";
 			std::cin >> filenameWhichGetCopy;
@@ -116,7 +117,7 @@ int main() {
 				system("pause");
 			}
 		}
-		else if (option == 2) {
+		else if (*aRev == 2) {
 			std::ifstream dataTXT{ forShowInfos };//Path for Output on console.
 			if (dataTXT.fail() || !dataTXT.is_open()) {
 				setColor(12);
@@ -138,7 +139,7 @@ int main() {
 				system("pause");
 			}
 		}
-		else if (option == 3) {
+		else if (*aRev == 3) {
 			setColor(10);
 			std::cout << "Exit Program in 3 Seconds.";
 			Sleep(3000);
