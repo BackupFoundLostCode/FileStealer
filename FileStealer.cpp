@@ -33,7 +33,7 @@ int main(){
 			std::cout << "Your input is not a Number!" << "\n";
 			Sleep(2000);
 			std::cin.clear();
-			std::cin.ignore();
+			std::cin.ignore(50,'\n');
 			continue;
 		}
 		else {
@@ -168,5 +168,6 @@ int main(){
 	}
 	return EXIT_SUCCESS;
 }
+
 
 
