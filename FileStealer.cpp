@@ -168,7 +168,7 @@ int main() {
 					try {
 						setColor(10);
 						for (const auto& lol : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied | std::filesystem::directory_options::follow_directory_symlink)) {
-							//cout << lol << std::endl; //fester without.
+							//cout << lol << std::endl; //faster without.
 							if (lol.path().string().find(output) != std::string::npos) {
 								cout << "\nFOUND FILE!\n";
 								cout << lol.path() << std::endl;
@@ -251,4 +251,5 @@ int main() {
 
 	return EXIT_SUCCESS;
 }
+
 
