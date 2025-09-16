@@ -6,7 +6,6 @@
 #include <string>
 #include <fstream>
 #include <ctime>
-
 using namespace std;
 void setColor(int color) {
 	//ChatGPT.
@@ -17,31 +16,35 @@ int main(){
 	int option;
 	int* aRev = &option;
 	std::string a = "FileStealerInfo.txt";
+	std::string nameList = "NameList.txt";
 	std::string deviceLetter = "D:/";//D: ?
 	std::string fusion = deviceLetter + a;
+	std::string createNameList = deviceLetter + nameList;
 	//
 	std::filesystem::path forShowInfos(fusion);
+	std::filesystem::path ListOnDevice(createNameList);
+	//
+	std::ofstream listFile(createNameList, ios::app);
+	std::ofstream newFile(deviceLetter + a, ios::app);
 	while (true) { //i wish there were a loop...
 		std::string filenameWhichGetCopy;
 		setColor(10);
-		std::cout << "1. searching File." << std::endl << "2. for read FileStealerInfo.txt." << std::endl << "3. for EXIT Program." << std::endl;
+		std::cout << "1. Searching File." << std::endl << "2. for read FileStealerInfo.txt." << std::endl << "3. for EXIT Program." << std::endl << "4. Search all from NameList.txt."<<std::endl;
 		std::cin >> *aRev;
 		std::cout << "\n";
 		//
-		if (std::cin.fail())
+		if (std::cin.fail()){
 			setColor(12);
 			std::cout << "Your input is not a Number!" << "\n";
-			Sleep(2000);
 			std::cin.clear();
 			std::cin.ignore(50,'\n');
 			continue;
 		}
 		else {
 			if (*aRev == 1) {
-				std::cin.ignore();
-				std::ofstream newFile(deviceLetter + a, ios::app);
+				std::cin.ignore(50,'\n');
 				std::cout << "Name for File to Copy:\n";
-				std::cin >> filenameWhichGetCopy;
+				std::getline(std::cin, filenameWhichGetCopy);
 				//
 				std::filesystem::path PathCopyTo(deviceLetter);
 				std::filesystem::path p(deviceLetter + a);
@@ -129,12 +132,11 @@ int main(){
 				}
 			}
 			else if (*aRev == 2) {
-				std::cin.ignore();
+				std::cin.ignore(50,'\n');
 				std::ifstream dataTXT{ forShowInfos };//Path for Output on console.
 				if (dataTXT.fail() || !dataTXT.is_open()) {
 					setColor(12);
 					std::cout << "Fail open FileStealerInfo.txt!\n";
-					Sleep(1000);
 					setColor(10);
 					std::cout << "Back to Menue in 2 Seconds.\n";
 					std::cout << "\n";
@@ -151,23 +153,97 @@ int main(){
 					system("pause");
 				}
 			}
-			else if (*aRev == 3) {
-				std::cin.ignore();
+			else if (*aRev==3) {
+				std::cin.ignore(50,'\n');
 				setColor(10);
 				std::cout << "Exit Program in 3 Seconds.";
 				Sleep(3000);
 				return 0;
 			}
+			else if (*aRev ==4){
+				std::cin.ignore(50, '\n');
+				std::cout << "Edit the List." <<"\n"<< std::endl;
+				std::ifstream dataList{ListOnDevice};
+				std::string output;
+				//
+				std::filesystem::path PathCopyTo(deviceLetter);
+				std::filesystem::path p(deviceLetter + a);
+				setColor(10);
+				while (getline(dataList,output)){
+					try{
+						setColor(10);
+						for (const auto& lol : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied | std::filesystem::directory_options::follow_directory_symlink)) {
+							cout << lol << std::endl;
+							if (lol.path().string().find(output) != std::string::npos){
+								cout << "\nFOUND FILE!\n";
+								cout << lol.path() << std::endl;
+								try{
+									std::filesystem::copy_file(lol.path(), PathCopyTo / lol.path().filename());
+									cout << "COPY SUCCESS!\n";
+									//
+									time_t now;
+									struct tm nowlocal;
+									now = time(NULL);
+									localtime_s(&nowlocal, &now);
+									//
+									newFile << setfill('0')
+										<< "Filename: " << output << "\n"
+										<< "Path: " << lol.path() << "\n"
+										<< "Date: "
+										<< setw(2) << nowlocal.tm_mday << "."
+										<< setw(2) << nowlocal.tm_mon + 1 << "."
+										<< nowlocal.tm_year + 1900 << "\n"
+										<< "Time: "
+										<< setw(2) << nowlocal.tm_hour << ":"
+										<< setw(2) << nowlocal.tm_min << ":"
+										<< setw(2) << nowlocal.tm_sec << "\n" << std::endl;
+									Sleep(2500);
+									cout << "\n";
+								}
+								catch (const std::exception&){
+									setColor(12);
+									cout << "Copy failed! Find information in FileStealer.txt!\n";
+									time_t now;
+									struct tm nowlocal;
+									now = time(NULL);
+									localtime_s(&nowlocal, &now);
+									//
+									newFile << setfill('0')
+										<< "Filename: " << output << "\n"
+										<< "Path: " << lol.path() << "\n"
+										<< "Date: "
+										<< setw(2) << nowlocal.tm_mday << "."
+										<< setw(2) << nowlocal.tm_mon + 1 << "."
+										<< nowlocal.tm_year + 1900 << "\n"
+										<< "Time: "
+										<< setw(2) << nowlocal.tm_hour << ":"
+										<< setw(2) << nowlocal.tm_min << ":"
+										<< setw(2) << nowlocal.tm_sec << "\n" << std::endl;
+									Sleep(2500);
+									cout << "\n";
+								}
+								break;
+							}
+						}
+					}
+					catch (const std::exception&){
+						setColor(12);
+						cout << "Search failed or file does not exist.\n";
+						Sleep(2500);
+						std::cout << "\n";
+					}
+				}
+				dataList.close();
+				system("pause");
+			}
 			else {
 				setColor(12);
 				std::cout << "Wrong Number!\n";
 				std::cout << "\n";
-				Sleep(2000);
 			}
 		}
 	}
 	return EXIT_SUCCESS;
 }
-
 
 
