@@ -23,7 +23,7 @@ int main() {
 	std::string fusion = deviceLetter + a;
 	std::string createNameList = deviceLetter + nameList;
 	std::ofstream listFile(createNameList, ios::app);
-	std::ofstream newFile(deviceLetter + a, ios::app);//eventuell duch fusion ersetzen.
+	std::ofstream newFile(deviceLetter + a, ios::app);
 	std::filesystem::path forShowInfos(fusion);
 	std::filesystem::path ListOnDevice(createNameList);
 
@@ -251,3 +251,4 @@ int main() {
 
 	return EXIT_SUCCESS;
 }
+
