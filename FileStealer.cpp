@@ -6,8 +6,6 @@
 #include <string>
 #include <fstream>
 #include <ctime>
-//IDEEN: das eine als methode schreiben.
-//Nicht nur files ganze Ordner kopieren.
 using namespace std;
 void setColor(int color) {
 	//ChatGPT.
@@ -199,3 +197,4 @@ int main() {
 	}
 	return EXIT_SUCCESS;
 }
+
