@@ -29,7 +29,7 @@ void inputFile(std::ofstream& newFile, std::string b, const std::filesystem::dir
 		<< setw(2) << nowlocal.tm_hour << ":"
 		<< setw(2) << nowlocal.tm_min << ":"
 		<< setw(2) << nowlocal.tm_sec << "\n" << std::endl;
-	 Sleep(2500);
+	 Sleep(1500);
 	cout << "\n";
 }
 int main() {
@@ -42,7 +42,7 @@ int main() {
 	std::string fusion = deviceLetter + a;
 	std::string createNameList = deviceLetter + nameList;
 	std::ofstream listFile(createNameList, ios::app);
-	std::ofstream newFile(deviceLetter + a, ios::app);//eventuell duch fusion ersetzen.
+	std::ofstream newFile(deviceLetter + a, ios::app);
 	std::filesystem::path forShowInfos(fusion);
 	std::filesystem::path ListOnDevice(createNameList);
 
@@ -78,7 +78,6 @@ int main() {
 						try {
 							setColor(10);
 							for (const auto& dd : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied | std::filesystem::directory_options::follow_directory_symlink)) {
-								//cout << dd << std::endl;
 								if (dd.path().string().find(filenameWhichGetCopy) != std::string::npos) {
 									cout << "\nFOUND FILE!\n";
 									cout << dd.path() << std::endl;
@@ -152,7 +151,6 @@ int main() {
 					try {
 						setColor(10);
 						for (const auto& lol : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied | std::filesystem::directory_options::follow_directory_symlink)) {
-							//cout << lol << std::endl; //fester without.
 							if (lol.path().string().find(output) != std::string::npos) {
 								cout << "\nFOUND FILE!\n";
 								cout << lol.path() << std::endl;
@@ -197,4 +195,5 @@ int main() {
 	}
 	return EXIT_SUCCESS;
 }
+
 
