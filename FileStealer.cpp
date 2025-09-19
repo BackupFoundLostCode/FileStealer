@@ -7,7 +7,6 @@
 #include <fstream>
 #include <ctime>
 #include "functions.hpp"
-//Nicht nur files ganze Ordner kopieren.
 using namespace std;
 int main() {
 	int option;
@@ -15,11 +14,11 @@ int main() {
 	std::string filenameWhichGetCopy;
 	std::string a = "FileStealerInfo.txt";
 	std::string nameList = "NameList.txt";
-	std::string deviceLetter = "D:/";//D: ?
+	std::string deviceLetter = "D:/";
 	std::string fusion = deviceLetter + a;
 	std::string createNameList = deviceLetter + nameList;
 	std::ofstream listFile(createNameList, ios::app);
-	std::ofstream newFile(deviceLetter + a, ios::app);//eventuell duch fusion ersetzen.
+	std::ofstream newFile(deviceLetter + a, ios::app);
 	std::filesystem::path forShowInfos(fusion);
 	std::filesystem::path ListOnDevice(createNameList);
 
@@ -129,7 +128,6 @@ int main() {
 					try {
 						setColor(10);
 						for (const auto& lol : std::filesystem::recursive_directory_iterator("C:/", std::filesystem::directory_options::skip_permission_denied | std::filesystem::directory_options::follow_directory_symlink)) {
-							//cout << lol << std::endl; //fester without.
 							if (lol.path().string().find(output) != std::string::npos) {
 								cout << "\nFOUND FILE!\n";
 								cout << lol.path() << std::endl;
@@ -174,3 +172,4 @@ int main() {
 	}
 	return EXIT_SUCCESS;
 }
+
