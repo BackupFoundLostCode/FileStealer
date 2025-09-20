@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 #include <ctime>
 
 void setColor(int color) {
@@ -35,6 +36,7 @@ void inputFile(std::ofstream& newFile, const std::string& b, const std::filesyst
 	std::cout << "\n";
 }
 void caseNumOne(std::string filenameWhichGetCopy,const std::string& deviceLetter,const std::string& fusion, bool status, std::ofstream& newFile) {
+	system("cls");
 	std::cin.ignore(50, '\n');
 	std::cout << "Name for File to Copy:\n";
 	std::getline(std::cin, filenameWhichGetCopy);
@@ -75,6 +77,7 @@ void caseNumOne(std::string filenameWhichGetCopy,const std::string& deviceLetter
 				setColor(12);
 				std::cerr << "Search failed or file does not exist.\n";
 				system("pause");
+				system("cls");
 				std::cout << "\n";
 			}
 		}
@@ -91,6 +94,7 @@ void caseNumOne(std::string filenameWhichGetCopy,const std::string& deviceLetter
 	}
 }
 void caseNumbTow(const std::filesystem::path& forShowInfos) {
+	system("cls");
 	std::cin.ignore(50, '\n');
 	std::ifstream dataTXT{ forShowInfos };//Path for Output on console.
 	if (dataTXT.fail() || !dataTXT.is_open()) {
@@ -110,9 +114,11 @@ void caseNumbTow(const std::filesystem::path& forShowInfos) {
 		}
 		dataTXT.close();
 		system("pause");
+		system("cls");
 	}
 }
 void caseNumbThree(const std::filesystem::path& ListOnDevice,const std::string& deviceLetter, const std::string& stealerTXT,bool status, std::ofstream& newFile) {
+	system("cls");
 	std::cin.ignore(50, '\n');
 	std::cout << "Edit the List." << "\n" << std::endl;
 	std::ifstream dataList{ ListOnDevice };
@@ -155,4 +161,5 @@ void caseNumbThree(const std::filesystem::path& ListOnDevice,const std::string& 
 	}
 	dataList.close();
 	system("pause");
+	system ("cls");
 }
