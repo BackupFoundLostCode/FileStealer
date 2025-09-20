@@ -7,7 +7,6 @@
 #include <fstream>
 #include <ctime>
 #include "functions.hpp"
-//Nicht nur files ganze Ordner kopieren.
 int main() {
 	int option{};
 	bool status = false;
@@ -60,3 +59,4 @@ int main() {
 	}
 	return EXIT_SUCCESS;
 }
+
