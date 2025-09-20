@@ -6,7 +6,9 @@
 #include <string>
 #include <fstream>
 #include <ctime>
+#include <cstdlib>
 #include "functions.hpp"
+//Nicht nur files ganze Ordner kopieren.
 int main() {
 	int option{};
 	bool status = false;
@@ -26,12 +28,12 @@ int main() {
 		std::cout << "1. Searching File." << std::endl << "2. for read FileStealerInfo.txt." << std::endl << "3. Search all from NameList.txt." << std::endl << "4. Exit Program." << std::endl;
 		std::cin >> option;
 		std::cout << "\n";
+		system("cls");
 		if (std::cin.fail()){
 			setColor(12);
-			std::cerr << "Your input is not a Number!" << "\n";
+			std::cerr << "Your Input is not a Number!" << "\n";
 			std::cin.clear();
 			std::cin.ignore(50, '\n');
-			continue;
 		}
 		else {
 			switch (option) {
@@ -52,11 +54,9 @@ int main() {
 			}
 				break;
 			default: setColor(12);
-				std::cerr << "Wrong Number!\n";
-				std::cout << "\n";
+				std::cerr << "Invalid Number!\n";
 			}
 		}
 	}
 	return EXIT_SUCCESS;
 }
-
