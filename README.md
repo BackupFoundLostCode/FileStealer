@@ -10,5 +10,3 @@ At the moment, it only searches the Recycle.bin, which is the last major compone
 However, I haven't found a solution for this yet, as I first need to properly understand the library and folder structures in general.
 
 (The letter of your USB device must be D).
-
-(Unfortunately, I can only get this far at the moment and no further. The program doesn't find everything, but that's the best I can do).
