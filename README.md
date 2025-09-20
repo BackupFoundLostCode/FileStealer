@@ -6,7 +6,7 @@ First, enter the letter of your USB or other device and then the name of the fil
 
 It is now possible to search an entire list; simply paste it into NameList.txt. Each entry must be on a separate line.
 
-At the moment, it only searches the Recycle.bin, which is the last major component that needs to be fixed in order to complete the programme. 
+At the moment, it only searches the Recycle.bin, which is the last major component that needs to be fixed in order to complete the programm. 
 However, I haven't found a solution for this yet, as I first need to properly understand the library and folder structures in general.
 
 (The letter of your USB device must be D).
