@@ -8,3 +8,5 @@ However, I haven't found a solution for this yet, as I first need to properly un
 It is now possible to search an entire list; simply paste it into NameList.txt. Each entry must be on a separate line.
 
 (The letter of your USB device must be D).
+
+COMING SOON: That the program not only searches the trash can but the entire C\\. 
