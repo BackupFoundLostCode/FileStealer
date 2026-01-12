@@ -11,4 +11,5 @@ It is now possible to search an entire list; simply paste it into NameList.txt. 
 
 COMING SOON: That the program not only searches the trash can but the entire C\\. 
 
-(I will soon have time to Work in it again)
+(I will soon have time to Work in it again.
+I know the code is extremely poorly written so far, but as soon as it works as it should, I will also adapt and improve the code).
